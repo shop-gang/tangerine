@@ -1,34 +1,8 @@
 # NEXT_STEPS for AetherPress
 
-This document outlines the immediate next actions to kickstart the project, based on the ROADMAP, MVP_CHECKLIST, and CONTRIBUTING guidelines.
+This document outlines the pending next actions for the project. For historical task completion, see `archive/NEXT_STEPS-2025-06-05.md`.
 
 ---
-
-## 1. Project Setup ✅
-
-- [x] Ensure Node.js (v14+) and npm are installed on all contributor machines.
-- [x] Run `npm install` at the project root to install dependencies (add a `package.json` if missing).
-- [x] Set up `.env` files for local development (copy from `.env.example` if available).
-- [x] Open the project in VS Code and use Dev Containers or Codespaces for a consistent environment.
-
-## 2. Repository Hygiene ✅
-
-- [x] Confirm all placeholder files are removed and folder structure matches CONTRIBUTING.md.
-- [x] Ensure all major folders have a `README.md` describing their purpose.
-- [x] Update `.gitignore` to only ignore `node_modules/` at the root and not in `shared/`.
-
-## 3. Initial Codebase Bootstrapping ✅
-
-- [x] Scaffold the React/Next.js frontend in `client/` (e.g., `npx create-next-app@latest`).
-- [x] Scaffold the Node.js/Express backend in `server/` (e.g., `npm init` + `express`).
-- [x] Add a `shared/` module for types, utilities, and constants.
-- [x] Add basic scripts in `scripts/` for linting, testing, and setup.
-
-## 4. Version Control & Branching ✅
-
-- [x] Work on the `dev` branch for all new features and fixes.
-- [x] Use `feature/*` branches for new features, merging into `dev` via PRs.
-- [x] Require at least one code review before merging (see CONTRIBUTING.md).
 
 ## 5. Core MVP Features (Phase 1)
 
@@ -51,8 +25,4 @@ This document outlines the immediate next actions to kickstart the project, base
 
 ---
 
-**Tip:** Tackle setup and scaffolding tasks first, then move to MVP features in small, reviewable PRs. Use the MVP_CHECKLIST to track progress and ensure nothing is missed.
-
----
-
-Let’s get building! 🚀
+**Tip:** Tackle MVP features one at a time with clear PRs. Keep up with documentation as features are added.
