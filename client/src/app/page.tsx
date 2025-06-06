@@ -1,15 +1,102 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { createDraft } from "../services/api";
 import { generatePDF } from "../services/pdf";
 import { ErrorBoundary } from "../components/ErrorBoundary";
+import { PdfExportBoundary } from "../components/PdfExportBoundary";
 import type { EbookDraft } from "../../../shared/types";
+
+const PreviewSection = ({ draft }: { draft: EbookDraft }) => {
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleExport = async () => {
+    setIsExporting(true);
+    try {
+      const pdfBlob = await generatePDF(draft);
+      const url = window.URL.createObjectURL(pdfBlob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${draft.title}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Error exporting PDF:", err);
+      // Error will be handled by PdfExportBoundary
+      throw err;
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  return (
+    <div className="p-6 border rounded-lg bg-white shadow-sm space-y-6">
+      <div className="flex justify-between items-start">
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold">{draft.title}</h2>
+          <p className="text-gray-600">By {draft.author}</p>
+        </div>
+        <PdfExportBoundary>
+          <button
+            onClick={handleExport}
+            disabled={isExporting}
+            className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+          >
+            {isExporting ? (
+              <span className="flex items-center gap-2">
+                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    fill="none"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  />
+                </svg>
+                Exporting...
+              </span>
+            ) : (
+              "Export as PDF"
+            )}
+          </button>
+        </PdfExportBoundary>
+      </div>
+
+      <div className="space-y-4">
+        {draft.sections.map((section, index) => (
+          <section key={index} className="space-y-2">
+            <h3 className="text-xl font-semibold">{section.heading}</h3>
+            {section.imageUrl && (
+              <div className="relative w-full h-48">
+                <Image
+                  src={section.imageUrl}
+                  alt={section.heading}
+                  fill
+                  className="object-cover rounded-lg"
+                />
+              </div>
+            )}
+            <p className="text-gray-700 leading-relaxed">{section.content}</p>
+          </section>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isExporting, setIsExporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [draft, setDraft] = useState<EbookDraft | null>(null);
 
@@ -30,28 +117,6 @@ export default function Home() {
       setDraft(null);
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleExport = async () => {
-    if (!draft) return;
-
-    setIsExporting(true);
-    try {
-      const pdfBlob = await generatePDF(draft);
-      const url = window.URL.createObjectURL(pdfBlob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `${draft.title}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error("Error exporting PDF:", err);
-      setError(err instanceof Error ? err.message : "Failed to export PDF");
-    } finally {
-      setIsExporting(false);
     }
   };
 
@@ -87,7 +152,6 @@ export default function Home() {
             >
               {isLoading ? (
                 <span className="flex items-center gap-2">
-                  {/* Heroicons: https://heroicons.com/ (MIT) - Using basic spinner pattern */}
                   <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
                     <circle
                       className="opacity-25"
@@ -120,66 +184,7 @@ export default function Home() {
                 </p>
               </div>
             ) : draft ? (
-              <div className="p-6 border rounded-lg bg-white shadow-sm space-y-6">
-                <div className="flex justify-between items-start">
-                  <div className="space-y-2">
-                    <h2 className="text-2xl font-bold">{draft.title}</h2>
-                    <p className="text-gray-600">By {draft.author}</p>
-                  </div>
-                  <button
-                    onClick={handleExport}
-                    disabled={isExporting}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
-                  >
-                    {isExporting ? (
-                      <span className="flex items-center gap-2">
-                        <svg
-                          className="animate-spin h-5 w-5"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                            fill="none"
-                          />
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          />
-                        </svg>
-                        Exporting...
-                      </span>
-                    ) : (
-                      "Export as PDF"
-                    )}
-                  </button>
-                </div>
-
-                <div className="space-y-4">
-                  {draft.sections.map((section, index) => (
-                    <section key={index} className="space-y-2">
-                      <h3 className="text-xl font-semibold">
-                        {section.heading}
-                      </h3>
-                      {section.imageUrl && (
-                        <img
-                          src={section.imageUrl}
-                          alt={section.heading}
-                          className="w-full h-48 object-cover rounded-lg"
-                        />
-                      )}
-                      <p className="text-gray-700 leading-relaxed">
-                        {section.content}
-                      </p>
-                    </section>
-                  ))}
-                </div>
-              </div>
+              <PreviewSection draft={draft} />
             ) : (
               <div className="p-6 border rounded-lg bg-gray-50">
                 <p className="text-gray-500 text-center">

@@ -2,6 +2,7 @@
 // API service for AetherPress client
 
 import type { PromptRequest, PromptResponse } from "../../../shared/types";
+import { withRetry } from "../utils/retry";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
@@ -40,28 +41,38 @@ export class ApiError extends Error {
 }
 
 export async function createDraft(prompt: string): Promise<PromptResponse> {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/draft`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ prompt } as PromptRequest),
-    });
+  return withRetry(
+    async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/draft`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ prompt } as PromptRequest),
+          // Add timeout
+          signal: AbortSignal.timeout(10000), // 10 second timeout
+        });
 
-    if (!response.ok) {
-      throw new ApiError(
-        response.status,
-        ApiError.getErrorMessage(response.status, response.statusText)
-      );
-    }
+        if (!response.ok) {
+          throw new ApiError(
+            response.status,
+            ApiError.getErrorMessage(response.status, response.statusText)
+          );
+        }
 
-    return response.json() as Promise<PromptResponse>;
-  } catch (error) {
-    if (error instanceof ApiError) {
-      throw error;
-    }
-    // Handle network errors (like when server is down)
-    throw new ApiError(0, ERROR_MESSAGES.NETWORK);
-  }
+        return response.json() as Promise<PromptResponse>;
+      } catch (error) {
+        if (error instanceof ApiError) {
+          throw error;
+        }
+        if (error instanceof DOMException && error.name === "AbortError") {
+          throw new ApiError(408, ERROR_MESSAGES.TIMEOUT);
+        }
+        // Handle network errors (like when server is down)
+        throw new ApiError(0, ERROR_MESSAGES.NETWORK);
+      }
+    },
+    { maxAttempts: 3, delayMs: 1000, backoff: true }
+  );
 }
