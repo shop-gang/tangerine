@@ -1,6 +1,6 @@
-# NEXT_STEPS for AetherPress
+# ISSUES: Core MVP Features (Phase 1)
 
-This document outlines the pending next actions for the project. For historical task completion, see `archive/NEXT_STEPS-2025-06-05.md`.
+This document tracks the implementation progress for Task 5: Core MVP Features (Phase 1). Check off items as they are completed. This list should be kept in sync with `NEXT_STEPS.md`.
 
 ---
 
@@ -59,20 +59,3 @@ This document outlines the pending next actions for the project. For historical 
 
 4. **Test:**
    - [ ] Manually test the flow: prompt → backend → preview → export.
-
----
-
-## 6. Testing & Linting
-
-- [ ] Add linting (ESLint + Prettier) for both frontend and backend.
-- [ ] Add basic test setup (Vitest for backend, React Testing Library for frontend).
-- [ ] Ensure all code passes lint and test checks before PR review.
-
-## 7. Documentation
-
-- [ ] Keep `README.md`, `CONTRIBUTING.md`, and docs up to date as the project evolves.
-- [ ] Document all scripts and setup steps in the relevant `README.md` files.
-
----
-
-**Tip:** Tackle MVP features one at a time with clear PRs. Keep up with documentation as features are added.
