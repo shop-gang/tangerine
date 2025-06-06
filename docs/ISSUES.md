@@ -82,8 +82,8 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
    - Loading states functioning
 
 2. Error Cases to Test:
-   - [ ] Network failures
-   - [ ] Invalid prompt handling
+   - [x] Network failures (tested: server down scenario) ✅
+   - [x] Invalid prompt handling (added user-friendly messages) ✅
    - [ ] PDF generation errors
    - [ ] Server timeout scenarios
 
@@ -91,10 +91,10 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
 
 1. Error Handling Improvements
 
-   - Implement Error Boundary component
-   - Add network error retry logic
-   - Improve error messages for users
-   - Add timeout handling
+   - [x] Improve error messages for users ✅
+   - [ ] Implement Error Boundary component
+   - [ ] Add network error retry logic
+   - [ ] Add timeout handling
 
 2. AI Orchestration
    - Implement Content Agent
