@@ -23,10 +23,10 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
 - [x] After submitting a prompt, call the backend endpoint.
 - [x] Display the returned draft in a preview area (could be a new component).
 
-### 4. Add PDF export functionality (can be stubbed initially)
+### 4. Add PDF export functionality (can be stubbed initially) ✅
 
-- [ ] Add a button in the frontend to "Export as PDF".
-- [ ] For now, clicking it can trigger a download of a static or mock PDF (or just a placeholder message).
+- [x] Add a button in the frontend to "Export as PDF".
+- [x] Implement basic PDF generation with title, content, and image placeholders.
 
 ### 5. Set up the basic AI Orchestrator and stub Content/Image/Assembly agents
 
@@ -47,6 +47,7 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
    - Added loading states and error handling
    - Created draft preview area
    - Set up API integration structure
+   - Added PDF export functionality
 
 2. Type Definitions ✅
    - Created shared types for prompt requests/responses
@@ -57,61 +58,28 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
    - Set up project structure and configuration
    - Added required documentation
 
-### Pending:
-1. Backend Implementation ✅
-   - Create `/api/draft` endpoint ✅
-   - Implement mock data generation ✅
-   - Set up AI orchestration structure ✅
+4. Backend Implementation ✅
+   - Created `/api/draft` endpoint
+   - Implemented mock data generation
+   - Set up basic AI orchestration structure
 
-2. PDF Export Feature
-   - Add export button
-   - Implement basic PDF generation
+### Pending:
+1. Integration Testing
+   - Test end-to-end flow: prompt → backend → preview → PDF
+   - Add basic error handling for API failures
+
+2. AI Orchestration
+   - Implement Content Agent
+   - Implement Image Agent
+   - Implement Assembly Agent
 
 ### Next Immediate Steps:
-1. **Backend:** ✅
-   - [x] Implement `/api/draft` POST endpoint.
-   - [x] Add stub AI Orchestrator and agent modules.
-   - [x] Return mock eBook draft data.
-
-2. **Integration:**
-   - [ ] Test end-to-end flow: prompt → backend → preview
-   - [ ] Add basic error handling for API failures
-
-3. **Export:**
-   - [ ] Add PDF export button
-   - [ ] Implement basic PDF generation
-
-### Quality Improvements
-
 1. **Testing:**
-   - [ ] Add component tests for:
-     - [ ] Prompt input form
-     - [ ] Loading states
-     - [ ] Draft preview
-     - [ ] Error states
-   - [ ] Add integration tests for API service
-   - [ ] Set up test coverage reporting
+   - [ ] Test end-to-end flow
+   - [ ] Add error handling for API failures
+   - [ ] Verify PDF generation across different content types
 
-2. **Error Handling:**
-   - [ ] Implement Error Boundary component
-   - [ ] Add fallback UI for failed states
-   - [ ] Improve error messages for user comprehension
-
-3. **Accessibility:**
-   - [ ] Add ARIA labels and roles
-   - [ ] Implement keyboard navigation
-   - [ ] Test with screen readers
-   - [ ] Add loading announcements
-   - [ ] Ensure proper focus management
-   - [ ] Add skip links if needed
-
-4. **Performance:**
-   - [ ] Add loading skeleton for preview
-   - [ ] Implement debouncing for API calls
-   - [ ] Optimize draft preview rendering
-
-Priority order:
-1. Error Boundary (prevents app crashes)
-2. Component Tests (ensures stability)
-3. Accessibility (makes app usable for all)
-4. Performance optimizations (improves UX)
+2. **AI Integration:**
+   - [ ] Expand AI Orchestrator functionality
+   - [ ] Implement specialized agents
+   - [ ] Add content generation capabilities
