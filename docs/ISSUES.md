@@ -12,11 +12,11 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
 - [x] UI: Simple text input + submit button.
 - [x] State: Store prompt in React state.
 
-### 2. Set up backend API endpoint to receive prompt and return a mock eBook draft
+### 2. Set up backend API endpoint to receive prompt and return a mock eBook draft ✅
 
-- [ ] In `server/index.js`, add a POST `/api/draft` endpoint.
-- [ ] Accepts `{ prompt: string }` in the body.
-- [ ] Returns a mock eBook draft (JSON with title, content, etc.).
+- [x] In `server/index.js`, add a POST `/api/draft` endpoint.
+- [x] Accepts `{ prompt: string }` in the body.
+- [x] Returns a mock eBook draft (JSON with title, content, etc.).
 
 ### 3. Integrate live preview in the frontend ✅
 
@@ -58,20 +58,20 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
    - Added required documentation
 
 ### Pending:
-1. Backend Implementation
-   - Create `/api/draft` endpoint
-   - Implement mock data generation
-   - Set up AI orchestration structure
+1. Backend Implementation ✅
+   - Create `/api/draft` endpoint ✅
+   - Implement mock data generation ✅
+   - Set up AI orchestration structure ✅
 
 2. PDF Export Feature
    - Add export button
    - Implement basic PDF generation
 
 ### Next Immediate Steps:
-1. **Backend:**
-   - [ ] Implement `/api/draft` POST endpoint.
-   - [ ] Add stub AI Orchestrator and agent modules.
-   - [ ] Return mock eBook draft data.
+1. **Backend:** ✅
+   - [x] Implement `/api/draft` POST endpoint.
+   - [x] Add stub AI Orchestrator and agent modules.
+   - [x] Return mock eBook draft data.
 
 2. **Integration:**
    - [ ] Test end-to-end flow: prompt → backend → preview
