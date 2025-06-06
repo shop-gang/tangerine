@@ -52,7 +52,7 @@ For detailed technical and product documentation, see the respective `README.md`
 - **Frontend:** Modern, component-based JS framework (React/Next.js). Focus on a clean, responsive UI.
 - **Backend:** Scalable platform (Node.js/Express). Ready to orchestrate multiple API calls.
 - **Database:** For a balance of structure and flexibility (PostgreSQL/JSONB).
-- **AI:** 
+- **AI:**
   - **Default:** Use Google's Gemini for both text and image generation.
   - Leverage best-in-class third-party APIs for core GenAI (image generation, possibly LLM for assistant). Build custom logic for agent orchestration and workflow, not foundational models.
   - Support use of [GitHub Models](https://github.com/features/models) to find and experiment with AI models for free; see Google AI Edge Gallery for locally run LLMs.
@@ -123,7 +123,7 @@ Please ensure your code adheres to our coding standards and includes relevant te
 
 ## License
 
-AetherPress is [MIT Licensed](LICENSE). By using AetherPress, you agree to abide by the terms of this license.
+AetherPress is [ISC Licensed](LICENSE). By using AetherPress, you agree to abide by the terms of this license.
 
 ---
 
