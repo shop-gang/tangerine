@@ -56,6 +56,24 @@ This document outlines the pending next actions for the project. For historical 
    - [ ] Document error handling procedures
    - [ ] Update API documentation
 
+### Critical Priority ⚠️
+
+1. **Testing Infrastructure Setup**
+   - [ ] Frontend (Jest + React Testing Library)
+     - [ ] Create `client/__tests__/` directory
+     - [ ] Configure Jest and RTL in `package.json`
+     - [ ] Add test examples for components
+     - [ ] Set up E2E testing infrastructure
+   - [ ] Backend (Vitest)
+     - [ ] Create `server/__tests__/` directory
+     - [ ] Configure Vitest
+     - [ ] Add API test examples
+     - [ ] Set up integration tests
+   - [ ] CI/CD Integration
+     - [ ] Update test scripts
+     - [ ] Configure coverage reporting
+     - [ ] Set up test automation in CI
+
 ### Future Considerations
 
 1. Performance optimization
@@ -63,4 +81,4 @@ This document outlines the pending next actions for the project. For historical 
 3. Advanced AI features
 4. Improved PDF customization
 
-Priority: Focus on error handling improvements first to ensure robust user experience.
+Priority: CRITICAL - Set up testing infrastructure before proceeding with any new feature development.

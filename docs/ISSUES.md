@@ -90,14 +90,31 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
 
 ### Pending:
 
-1. Error Handling Improvements
+1. ⚠️ Testing Infrastructure (CRITICAL)
+
+   - [ ] Frontend test setup
+     - [ ] Configure Jest and React Testing Library
+     - [ ] Add `client/__tests__/` directory
+     - [ ] Set up component test examples
+     - [ ] Add E2E test configuration
+   - [ ] Backend test setup
+     - [ ] Configure Vitest
+     - [ ] Add `server/__tests__/` directory
+     - [ ] Set up API test examples
+     - [ ] Add integration test framework
+   - [ ] Test scripts and CI
+     - [ ] Update `scripts/test.sh`
+     - [ ] Update `scripts/test-in-container.sh`
+     - [ ] Configure test coverage reporting
+
+2. Error Handling Improvements
 
    - [x] Improve error messages for users ✅
    - [x] Implement Error Boundary component ✅
    - [x] Add network error retry logic ✅
    - [x] Add timeout handling ✅
 
-2. AI Orchestration
+3. AI Orchestration
    - Implement Content Agent
    - Implement Image Agent
    - Implement Assembly Agent
