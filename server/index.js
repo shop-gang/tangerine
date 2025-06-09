@@ -1,6 +1,6 @@
 // server/index.js
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -62,5 +62,7 @@ app.post("/api/draft", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
+
+export { app };

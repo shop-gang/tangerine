@@ -1,11 +1,20 @@
 {
+  "type": "module",
   "dependencies": {
-    "express": "^5.1.0",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
   },
   "scripts": {
     "start": "node index.js",
     "lint": "echo 'Add linter setup here'",
-    "test": "echo 'Add test setup here'"
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@types/supertest": "^6.0.3",
+    "@vitest/coverage-v8": "^3.2.3",
+    "supertest": "^7.1.1",
+    "vitest": "^3.2.3"
   }
 }
