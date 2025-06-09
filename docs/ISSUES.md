@@ -39,7 +39,7 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
 
 ---
 
-## Current Progress Summary (June 6, 2025 - EOD)
+## Current Progress Summary (June 9, 2025 - EOD)
 
 ### Completed:
 
@@ -72,7 +72,7 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
    - Set up basic AI orchestration structure
    - Verified CORS and API connectivity
 
-### Testing Status (June 6, 2025):
+### Testing Status (June 9, 2025):
 
 1. End-to-End Flow ✅
 
@@ -96,15 +96,14 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
      - [x] Configure Jest and React Testing Library
      - [x] Add `client/__tests__/` directory
      - [x] Set up component test examples (ErrorBoundary)
-     - [ ] Add E2E test configuration
+     - [x] Add E2E test configuration (Playwright, robust Jest/Playwright separation, and test-in-container script improvements)
    - [x] Backend test setup ✅
      - [x] Configure Vitest
      - [x] Add `server/__tests__/` directory
      - [x] Set up API test examples
-     - [ ] Add integration test framework
-   - [ ] Test scripts and CI
-     - [ ] Update `scripts/test.sh`
-     - [ ] Update `scripts/test-in-container.sh`
+     - [x] Add integration test framework (supertest)
+   - [x] Test scripts and CI
+     - [x] Update `scripts/test.sh` and `scripts/test-in-container.sh` to run all test types and handle E2E server startup
      - [ ] Configure test coverage reporting
 
 2. Error Handling Improvements
@@ -132,3 +131,7 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
    - [ ] Expand AI Orchestrator functionality
    - [ ] Implement specialized agents
    - [ ] Add content generation capabilities
+
+---
+
+#### Documentation updated June 9, 2025: E2E and integration test setup, robust Jest/Playwright separation, and test-in-container script improvements complete.
