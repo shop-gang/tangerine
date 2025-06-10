@@ -104,7 +104,7 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
      - [x] Add integration test framework (supertest)
    - [x] Test scripts and CI
      - [x] Update `scripts/test.sh` and `scripts/test-in-container.sh` to run all test types and handle E2E server startup
-     - [ ] Configure test coverage reporting
+     - [x] Configure test coverage reporting (See Test Covearage Reporting To-Do below)
 
 2. Error Handling Improvements
 
@@ -131,6 +131,20 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
    - [ ] Expand AI Orchestrator functionality
    - [ ] Implement specialized agents
    - [ ] Add content generation capabilities
+
+---
+
+## Test Coverage Reporting To-Do (as of June 10, 2025)
+
+- [x] Frontend: Ensure Jest is configured to collect coverage and run with `npm run test:coverage`.
+- [x] Backend: Ensure Vitest is configured to collect coverage and run with `npm run test:coverage`.
+- [x] Integrate coverage reporting into `scripts/test.sh` and `scripts/test-in-container.sh` for both frontend and backend.
+- [ ] Add CI workflow steps to run coverage and (optionally) upload to Codecov or Coveralls.
+- [ ] Optionally set minimum coverage thresholds in Jest and Vitest configs.
+- [ ] Document how to view and interpret coverage reports in CONTRIBUTING.md or relevant docs.
+
+> **Note:**
+> If you see messages like `Jest: "global" coverage threshold for statements (80%) not met: 5.14%`, this means your current test suite does not cover enough of the codebase to meet the configured thresholds. These messages are a prompt to add more tests. As you increase test coverage, these warnings will disappear once thresholds are met.
 
 ---
 
