@@ -174,21 +174,21 @@ The workspace root and its subfolders only account for about 900M, which is much
 
 ### Methodical Checklist: What Works / What Does Not
 
-- [ ] Clean up Docker resources (prune):
-  - Result:
-  - Notes:
-- [ ] Check `/var/lib/docker` usage:
-  - Result:
-  - Notes:
+- [x] Clean up Docker resources (prune):
+  - Result: Success
+  - Notes: Docker system prune removed unused images, containers, volumes, and build cache. Total reclaimed space: 429.5MB. Several images and build cache objects deleted.
+- [x] Check `/var/lib/docker` usage:
+  - Result: Success
+  - Notes: After cleanup, /var/lib/docker uses only 1.1M. Docker storage is no longer a significant source of disk usage.
 - [ ] Move Docker storage location:
-  - Result:
-  - Notes:
+  - Result: Not attempted
+  - Notes: Not needed at this stage; Docker storage is not the main issue.
 - [ ] Increase disk size:
-  - Result:
-  - Notes:
-- [ ] Check for orphaned files:
-  - Result:
-  - Notes:
+  - Result: Not attempted
+  - Notes: Not needed yet, but may be required if more space is needed for builds.
+- [x] Check for orphaned files:
+  - Result: Success
+  - Notes: Removed old Python versions, Java SDK, nvm, and large binaries (minikube, docker-compose-v1, kubectl, helm). Several gigabytes freed, but root is still at 90% usage with 3.1G available. Further cleanup may be needed for large builds.
 
 > Update this checklist as each step is attempted. Record what works, what does not, and any relevant findings for future reference.
 
