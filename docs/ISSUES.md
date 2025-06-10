@@ -152,11 +152,45 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
 
 The workspace root and its subfolders only account for about 900M, which is much less than the 27G used on disk. To further investigate disk usage, consider the following:
 
-- Check for large Docker images, containers, or devcontainer layers that may not have been fully pruned.
-- Investigate system files, logs, or user data outside `/aether` that may be consuming space.
-- Look for hidden files or directories (e.g., those starting with a dot) in `/aether` and elsewhere.
-- Use tools like `du -h -d 1 /` and `du -h -d 1 /home` to identify other large directories on the system.
-- Consider running `docker system df` for a summary of Docker disk usage.
+### Docker Storage: Suggestions to Resolve
+
+1. **Clean Up Docker Resources**
+   - Remove unused containers, images, volumes, and build cache:
+     - `docker system prune -af --volumes`
+   - Frees up space by deleting all stopped containers, unused images, and dangling volumes.
+2. **Check Disk Usage for `/var/lib/docker`**
+   - See how much space is used:
+     - `sudo du -sh /var/lib/docker/*`
+3. **Move Docker’s Storage Location**
+   - Move Docker’s data directory to a partition with more space:
+     1. Stop Docker: `sudo systemctl stop docker`
+     2. Move the data: `sudo mv /var/lib/docker /path/to/larger/disk/docker`
+     3. Create a symlink: `sudo ln -s /path/to/larger/disk/docker /var/lib/docker`
+     4. Start Docker: `sudo systemctl start docker`
+4. **Increase Disk Size (Cloud/VM)**
+   - Increase the disk size allocated to the partition containing `/var/lib/docker`.
+5. **Check for Orphaned Files**
+   - Delete old or orphaned files in `/var/lib/docker` or `/tmp` to free up space.
+
+### Methodical Checklist: What Works / What Does Not
+
+- [ ] Clean up Docker resources (prune):
+  - Result:
+  - Notes:
+- [ ] Check `/var/lib/docker` usage:
+  - Result:
+  - Notes:
+- [ ] Move Docker storage location:
+  - Result:
+  - Notes:
+- [ ] Increase disk size:
+  - Result:
+  - Notes:
+- [ ] Check for orphaned files:
+  - Result:
+  - Notes:
+
+> Update this checklist as each step is attempted. Record what works, what does not, and any relevant findings for future reference.
 
 ---
 
