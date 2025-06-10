@@ -148,16 +148,15 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
 
 ---
 
-## Next Immediate Steps (Storage Cleanup):
+## Next Immediate Steps (Disk Usage Investigation):
 
-1. **Free Up Workspace Storage:**
-   - [ ] Delete old coverage reports and test results in `client/coverage/`, `server/coverage/`, and `client/test-results/`.
-   - [ ] Run `npm prune` in all `package.json` directories to remove extraneous packages.
-   - [ ] Remove unused files in `docs/archive/` and other documentation folders.
-   - [ ] Run `npm cache clean --force` and clear other package manager caches if used.
-   - [ ] (Optional) Prune unused Docker images/containers if using Docker: `docker system prune -a`.
-   - [ ] (Optional) Prune devcontainer layers: `docker image prune` or use VS Code Dev Containers command.
-   - [ ] Move large, infrequently used files to external or cloud storage if possible.
+The workspace root and its subfolders only account for about 900M, which is much less than the 27G used on disk. To further investigate disk usage, consider the following:
+
+- Check for large Docker images, containers, or devcontainer layers that may not have been fully pruned.
+- Investigate system files, logs, or user data outside `/aether` that may be consuming space.
+- Look for hidden files or directories (e.g., those starting with a dot) in `/aether` and elsewhere.
+- Use tools like `du -h -d 1 /` and `du -h -d 1 /home` to identify other large directories on the system.
+- Consider running `docker system df` for a summary of Docker disk usage.
 
 ---
 
