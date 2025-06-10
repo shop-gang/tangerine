@@ -148,4 +148,17 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
 
 ---
 
+## Next Immediate Steps (Storage Cleanup):
+
+1. **Free Up Workspace Storage:**
+   - [ ] Delete old coverage reports and test results in `client/coverage/`, `server/coverage/`, and `client/test-results/`.
+   - [ ] Run `npm prune` in all `package.json` directories to remove extraneous packages.
+   - [ ] Remove unused files in `docs/archive/` and other documentation folders.
+   - [ ] Run `npm cache clean --force` and clear other package manager caches if used.
+   - [ ] (Optional) Prune unused Docker images/containers if using Docker: `docker system prune -a`.
+   - [ ] (Optional) Prune devcontainer layers: `docker image prune` or use VS Code Dev Containers command.
+   - [ ] Move large, infrequently used files to external or cloud storage if possible.
+
+---
+
 #### Documentation updated June 9, 2025: E2E and integration test setup, robust Jest/Playwright separation, and test-in-container script improvements complete.
