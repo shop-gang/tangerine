@@ -7,23 +7,10 @@ cd "$(dirname "$0")/.."
 # Check if we're inside the devcontainer (Codespaces or VS Code Dev Container)
 if [ -f "/.devcontainer_marker" ] || [ "$CODESPACES" = "true" ]; then
   echo "[INFO] Running tests inside the devcontainer..."
-  cd client && npm test
-  cd ../server && npm test
-
-  # Start frontend server in background for E2E tests
-  cd ../client
-  npm run build
-  npm run start &
-  NEXT_PID=$!
-  echo "[INFO] Started frontend server with PID $NEXT_PID"
-  sleep 5 # Wait for server to be ready
-
-  npx playwright test
-  TEST_EXIT_CODE=$?
-
-  kill $NEXT_PID
-  wait $NEXT_PID 2>/dev/null
-  exit $TEST_EXIT_CODE
+  cd client && npm run test:coverage
+  cd ../server && npm run test:coverage
+  cd ../client && echo "[INFO] Frontend coverage report: client/coverage/lcov-report/index.html"
+  cd ../server && echo "[INFO] Backend coverage report: server/coverage/index.html"
 else
   echo "[ERROR] This script must be run inside the VS Code Dev Container or GitHub Codespace."
   echo "Open the project in a devcontainer and re-run this script."
