@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          cd client && npm ci
+          cd ../server && npm ci
+
+      - name: Run tests
+        run: |
+          cd client && npm test
+          cd ../server && npm test
+
+      - name: Run E2E tests
+        run: cd client && npx playwright install --with-deps chromium && npm run test:e2e
