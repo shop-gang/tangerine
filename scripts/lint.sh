@@ -1,8 +1,11 @@
-// scripts/lint.sh
 #!/bin/zsh
 
 # Lint frontend
-cd ../client && npm run lint
+cd "$(dirname "$0")/../client" || exit 1
+npm run lint
+cd - > /dev/null
 
 # Lint backend
-cd ../server && npm run lint
+cd "$(dirname "$0")/../server" || exit 1
+npm run lint
+cd - > /dev/null

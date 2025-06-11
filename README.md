@@ -1,4 +1,4 @@
-# AetherPress (Original)
+# AetherPress (Original/tangerine)
 
 AetherPress is the magic wand for creating visually stunning, graphically rich eBooks powered by intelligent AI. Whether you're a writer, poet, educator, marketer, or an indie publisher, AetherPress transforms your simple prompt into a polished eBook draft in minutes—no deep design skills required.
 
