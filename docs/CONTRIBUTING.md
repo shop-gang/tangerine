@@ -61,6 +61,26 @@ Thank you for your interest in contributing! This guide explains our workflow, c
 - Use GitHub Issues to report bugs or request features
 - Please search for existing issues before opening a new one
 
+## Viewing and Interpreting Coverage Reports
+
+- **Frontend (Jest):**
+
+  - Run `cd client && npm run test:coverage` to generate a coverage report.
+  - Open `client/coverage/lcov-report/index.html` in your browser for a detailed, navigable report.
+  - Minimum global coverage thresholds are enforced (80% for branches, functions, lines, statements). If not met, CI will fail.
+
+- **Backend (Vitest):**
+
+  - Run `cd server && npm run test:coverage` to generate a coverage report.
+  - Open `server/coverage/index.html` in your browser for a detailed, navigable report.
+  - Minimum global coverage thresholds are enforced (80% for branches, functions, lines, statements). If not met, CI will fail.
+
+- **CI Integration:**
+  - Coverage is automatically run and uploaded to Codecov on every PR and push to `main` or `dev`.
+  - You can view coverage status and details directly in the Codecov UI (see PR checks for links).
+
+> If you see a coverage threshold error in CI, add or improve tests to increase coverage.
+
 ---
 
 Thank you for helping make AetherPress AI better!

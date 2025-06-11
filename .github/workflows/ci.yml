@@ -35,3 +35,25 @@ jobs:
 
       - name: Run E2E tests
         run: cd client && npx playwright install --with-deps chromium && npm run test:e2e
+
+      - name: Run coverage (frontend)
+        run: cd client && npm run test:coverage
+
+      - name: Run coverage (backend)
+        run: cd server && npm run test:coverage
+
+      - name: Upload frontend coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./client/coverage/lcov.info
+          flags: frontend
+          name: codecov-frontend
+          fail_ci_if_error: false
+
+      - name: Upload backend coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./server/coverage/lcov.info
+          flags: backend
+          name: codecov-backend
+          fail_ci_if_error: false
