@@ -63,12 +63,16 @@ describe("ToastContainer", () => {
     });
 
     const closeButton = screen.getByLabelText("Close");
-    await userEvent.click(closeButton);
+    await act(async () => {
+      await userEvent.click(closeButton);
+    });
 
-    await waitFor(() => {
-      expect(
-        screen.queryByText("Test warning message")
-      ).not.toBeInTheDocument();
+    await act(async () => {
+      await waitFor(() => {
+        expect(
+          screen.queryByText("Test warning message")
+        ).not.toBeInTheDocument();
+      });
     });
   });
 
