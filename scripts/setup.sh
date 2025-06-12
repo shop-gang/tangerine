@@ -1,8 +1,11 @@
-// scripts/setup.sh
 #!/bin/zsh
 
 # Install frontend dependencies
-cd ../client && npm install
+cd "$(dirname "$0")/../client" || exit 1
+npm install
+cd - > /dev/null
 
 # Install backend dependencies
-cd ../server && npm install
+cd "$(dirname "$0")/../server" || exit 1
+npm install
+cd - > /dev/null

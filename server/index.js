@@ -1,6 +1,7 @@
 // server/index.js
 import express from "express";
 import cors from "cors";
+import { AIOrchestrator } from "./aiAgents.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -8,33 +9,8 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Mock data generator for eBook drafts
-function generateMockDraft(prompt) {
-  return {
-    title: `Generated Book: ${prompt.slice(0, 30)}...`,
-    author: "AetherPress AI",
-    sections: [
-      {
-        heading: "Chapter 1",
-        content: `Here's a draft based on your prompt: "${prompt}"`,
-        imageUrl: "https://picsum.photos/800/400", // Placeholder image
-      },
-      {
-        heading: "Chapter 2",
-        content: "This is a mock chapter to demonstrate the structure.",
-        imageUrl: "https://picsum.photos/800/400?random=2",
-      },
-    ],
-  };
-}
-
-// Basic AI orchestration structure
-const aiOrchestrator = {
-  async processDraft(prompt) {
-    // TODO: Implement actual AI processing
-    return generateMockDraft(prompt);
-  },
-};
+// Replace mock aiOrchestrator with class-based orchestrator
+const aiOrchestrator = new AIOrchestrator();
 
 app.get("/", (req, res) => {
   res.send("AetherPress backend is running!");
@@ -51,13 +27,11 @@ app.post("/api/draft", async (req, res) => {
       });
     }
 
-    const draft = await aiOrchestrator.processDraft(prompt);
-    res.json({ draft });
-  } catch (error) {
-    console.error("Error generating draft:", error);
-    res.status(500).json({
-      error: "Failed to generate draft. Please try again.",
-    });
+    // Use orchestrator to generate draft
+    const draft = aiOrchestrator.generateDraft(prompt);
+    return res.json({ draft });
+  } catch (err) {
+    return res.status(500).json({ error: "Failed to generate draft." });
   }
 });
 
