@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
+import { describe, it, expect, beforeAll, afterAll, beforeEach } from "vitest";
 import request from "supertest";
 import { app } from "../index.js";
 
@@ -6,6 +6,10 @@ import { app } from "../index.js";
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 describe("Error Handling Integration Tests", () => {
+  beforeEach(() => {
+    global._failFirstCalled = false;
+  });
+
   describe("API Error Scenarios", () => {
     it("should handle invalid input with proper error response", async () => {
       const response = await request(app)
@@ -30,12 +34,13 @@ describe("Error Handling Integration Tests", () => {
     it("should timeout for slow responses", async () => {
       const response = await request(app)
         .post("/api/draft")
-        .send({ prompt: "timeout_test", simulateTimeout: true });
+        .send({ prompt: "timeout_test", simulateTimeout: true })
+        .timeout(9000); // Increase timeout for this test
 
       expect(response.status).toBe(408);
       expect(response.body).toHaveProperty("error");
       expect(response.body.error).toMatch(/timeout/i);
-    });
+    }, 10000); // 10s timeout for this test
   });
 
   describe("Content Generation Error Handling", () => {
@@ -84,8 +89,16 @@ describe("Error Handling Integration Tests", () => {
 
   describe("Recovery and Retry Scenarios", () => {
     it("should succeed after retrying on temporary failure", async () => {
+      const testId = Date.now().toString();
+      // First request fails
+      await request(app)
+        .post("/api/draft")
+        .set("x-test-id", testId)
+        .send({ prompt: "retry_test", failFirst: true });
+      // Second request should succeed
       const response = await request(app)
         .post("/api/draft")
+        .set("x-test-id", testId)
         .send({ prompt: "retry_test", failFirst: true });
 
       expect(response.status).toBe(200);

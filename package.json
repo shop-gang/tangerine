@@ -1,5 +1,9 @@
 {
   "devDependencies": {
+    "@babel/core": "^7.27.4",
+    "@babel/preset-react": "^7.27.1",
+    "@testing-library/user-event": "^14.6.1",
+    "babel-jest": "^30.0.0",
     "ts-node": "^10.9.2"
   },
   "name": "aether",
@@ -32,7 +36,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/bar-gains/AetherPress/issues"
   },
