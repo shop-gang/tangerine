@@ -1,6 +1,6 @@
 # NEXT_STEPS for AetherPress
 
-This document outlines the pending next actions for the project. For historical task completion, see `archive/NEXT_STEPS-2025-06-05.md`.
+This document outlines the pending next actions for the project.
 
 ---
 

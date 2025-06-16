@@ -13,86 +13,86 @@ This document tracks the implementation progress for Task 5: Core MVP Features (
 
 ---
 
-## Task 1: Error Handling Implementation
+# Task 1: Error Handling Implementation (Detailed To-Do)
 
-### 1.1 User Interface Error Handling
+This document provides a step-by-step, coder-ready breakdown for implementing robust error handling in AetherPress, covering both frontend (client) and backend (server) as required by the MVP.
 
-- [x] **Error Boundary Component** ✅
+---
 
-  - [x] Create ErrorBoundary.tsx component
-  - [x] Implement fallback UI for component errors
-  - [x] Add error reporting functionality
-  - [x] Test error boundary with simulated failures
+## 1. User Interface (Frontend)
 
-- [~] **User Feedback System**
-  - [x] Design error message templates
-  - [x] Implement toast/notification system
-  - [x] Add error classification (user vs. system errors)
-  - [ ] Create error message documentation
+### 1.1 Error Boundary & Fallback UI
 
-### 1.2 Network Error Handling
+- [ ] Ensure `ErrorBoundary.tsx` is present and wraps all major UI trees (app root, page, critical components).
+- [ ] Implement fallback UI with clear, user-friendly error messages.
+- [ ] Add error reporting (e.g., log to console, send to backend if needed).
+- [ ] Simulate component errors to verify fallback and reporting.
 
-- [x] **Retry Logic** ✅
+### 1.2 User Feedback System
 
-  - [x] Implement exponential backoff strategy
-  - [x] Add maximum retry limits
-  - [x] Create retry status indicators
-  - [x] Test retry scenarios
+- [ ] Use `ToastContainer.tsx` and `useToast.ts` to display error notifications.
+- [ ] Standardize error message templates (user error, system error, network error, etc.).
+- [ ] Ensure error messages are actionable (e.g., "Check your input and try again").
+- [ ] Add tooltips or inline help for common error scenarios.
+- [ ] Document all user-facing error messages and their triggers.
 
-- [x] **Timeout Management** ✅
-  - [x] Set appropriate timeout values for each API
-  - [x] Implement timeout handling logic
-  - [x] Add timeout recovery procedures
-  - [x] Test timeout scenarios
+### 1.3 Input Validation
 
-### 1.3 Processing Error Handling
+- [ ] Validate all user inputs (prompt, settings, uploads) before processing.
+- [ ] Show specific error messages for invalid/empty/unsupported inputs.
+- [ ] Prevent submission of invalid forms; highlight fields with issues.
 
-- [x] **Content Generation Errors** ✅
+### 1.4 Network & API Error Handling
 
-  - [x] Add validation for AI-generated content
-  - [x] Implement fallback content options
-  - [x] Create content error recovery flows
-  - [x] Test content generation failures
+- [ ] Display clear messages for network/API failures (timeouts, 5xx, 4xx, etc.).
+- [ ] Use retry logic (see `retry.ts`) for transient errors; show status to user.
+- [ ] Indicate when a retry is in progress and when it has failed.
 
-- [x] **Image Generation Errors** ✅
-  - [x] Add validation for generated images
-  - [x] Implement fallback image options
-  - [x] Create image error recovery flows
-  - [x] Test image generation failures
+---
 
-### 1.4 PDF Export Error Handling
+## 2. Backend (Server)
 
-- [x] **Export Process Errors** ✅
-  - [x] Add validation for PDF structure
-  - [x] Implement partial export recovery
-  - [x] Create export error reporting
-  - [x] Test PDF generation failures
+### 2.1 Input Validation & Sanitization
 
-### 1.5 Testing & Documentation
+- [ ] Validate all incoming API payloads (types, required fields, value ranges).
+- [ ] Return structured error responses (HTTP status, error code, message, details).
+- [ ] Log invalid input attempts for monitoring.
 
-- [~] **Error Testing Infrastructure**
+### 2.2 Processing Error Handling
 
-  - [x] Create error simulation utilities
-  - [x] Add error boundary tests
-  - [x] Implement integration tests for error flows
-  - [ ] Set up error monitoring
+- [ ] Catch and handle errors in all async operations (AI agent calls, file I/O, PDF generation, etc.).
+- [ ] Return actionable error messages to the frontend (avoid leaking stack traces).
+- [ ] Implement fallback or recovery logic for known failure modes (e.g., AI service unavailable).
 
-- [ ] **Error Documentation**
-  - [x] Document all error types and codes
-  - [ ] Create error handling procedures
-  - [ ] Add troubleshooting guides
-  - [ ] Document recovery procedures
+### 2.3 System Stability
 
-Priority Sequence:
+- [ ] Ensure the server does not crash on unhandled exceptions (use process-level error handlers).
+- [ ] Log all critical errors with timestamps and context for debugging.
+- [ ] Add health check endpoints or scripts to verify server stability.
 
-1. Error Boundary & UI Feedback
-2. Network & Processing Errors
-3. Export Error Handling
-4. Testing & Documentation
+---
 
-Success Criteria:
+## 3. Integration & Testing
 
-- All error scenarios have appropriate user feedback
-- System maintains stability during errors
-- Error recovery procedures are documented
-- Test coverage for error scenarios > 90%
+- [ ] Write unit and integration tests for all error handling logic (frontend and backend).
+- [ ] Simulate invalid inputs, network failures, and processing errors in tests.
+- [ ] Verify that all error messages are displayed as intended and system remains stable.
+- [ ] Document test procedures and expected outcomes for error scenarios.
+
+---
+
+## 4. Documentation
+
+- [ ] Update user documentation and tooltips to explain error messages and recovery steps.
+- [ ] Maintain a list of all error codes/messages for future reference and localization.
+
+---
+
+**Acceptance Criteria:**
+
+- All user-facing errors are clear, actionable, and non-technical.
+- Invalid inputs and processing failures are handled gracefully without system crashes.
+- Error handling is covered by automated tests.
+- Documentation/tooltips are available for all error scenarios.
+
+(Last updated: June 16, 2025)
