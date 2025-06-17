@@ -18,6 +18,10 @@ cd "$(dirname "$0")/.."
 if [ -f "/.devcontainer_marker" ] || [ "$CODESPACES" = "true" ]; then
     echo "[INFO] Running tests inside the devcontainer..."
     
+    # Set up test environment
+    chmod +x scripts/setup-test-env.sh
+    ./scripts/setup-test-env.sh devcontainer
+    
     # Frontend tests
     echo "[INFO] Running frontend tests..."
     cd client

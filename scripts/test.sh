@@ -14,6 +14,10 @@ check_dependencies() {
 # Navigate to project root
 cd "$(dirname "$0")/.."
 
+# Set up test environment
+chmod +x scripts/setup-test-env.sh
+./scripts/setup-test-env.sh local
+
 # Frontend tests
 echo "[INFO] Running frontend tests..."
 cd ./client

@@ -13,7 +13,7 @@ This checklist tracks the achievables required to realize the goals in the CRITI
 
 - [ ] **Environment Consistency**
 
-  - [ ] Create/update scripts for isolated test environments (local, CI, dev containers)
+  - [x] Create/update scripts for isolated test environments (local, CI, dev containers)
   - [ ] Provide configuration for mocking/stubbing APIs, services, and databases
 
 - [x] **Quality & Coverage**
