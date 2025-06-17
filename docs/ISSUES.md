@@ -23,7 +23,7 @@ This document provides a step-by-step, coder-ready breakdown for implementing ro
 
 ### 1.1 Error Boundary & Fallback UI
 
-- [ ] Ensure `ErrorBoundary.tsx` is present and wraps all major UI trees (app root, page, critical components).
+- [✓] Ensure `ErrorBoundary.tsx` is present and wraps all major UI trees (app root, page, critical components).
 - [ ] Implement fallback UI with clear, user-friendly error messages.
 - [ ] Add error reporting (e.g., log to console, send to backend if needed).
 - [ ] Simulate component errors to verify fallback and reporting.
