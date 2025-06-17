@@ -38,7 +38,7 @@ setup_env_vars() {
 # Function to wait for database to be ready
 wait_for_db() {
     echo "Waiting for database to be ready..."
-    "$(dirname "$0")/devcontainer_db_health_check.sh"
+${0%/*}/devcontainer_db_health_check.sh
 }
 
 # Function to reset test database
