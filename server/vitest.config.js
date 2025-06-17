@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
@@ -6,13 +7,18 @@ export default defineConfig({
     environment: "node",
     coverage: {
       provider: "v8",
-      reporter: ["text", "json", "html"],
+      reporter: ["text", "html", "json", "lcov"],
+      exclude: [
+        "node_modules/**",
+        "coverage/**",
+        "**/*.test.*",
+        "**/*.config.*",
+      ],
+      all: true,
       lines: 80,
       functions: 80,
       branches: 80,
       statements: 80,
-      // If any threshold is not met, Vitest will fail
     },
-    include: ["**/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
   },
 });
