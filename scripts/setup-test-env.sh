@@ -3,6 +3,10 @@
 
 set -e  # Exit on error
 
+# Determine script locations without hard-coding
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
 # Function to set up environment variables
 setup_env_vars() {
     local env=$1
@@ -38,7 +42,7 @@ setup_env_vars() {
 # Function to wait for database to be ready
 wait_for_db() {
     echo "Waiting for database to be ready..."
-${0%/*}/devcontainer_db_health_check.sh
+    "${SCRIPT_DIR}/devcontainer_db_health_check.sh"
 }
 
 # Function to reset test database

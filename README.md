@@ -49,6 +49,11 @@ For detailed technical and product documentation, see the respective `README.md`
 
 ## Technology Vibe
 
+- **Module System:** ES Modules (ESM) standardized across all packages for:
+  - Native async/await support without transpilation
+  - Better tree-shaking and build optimization
+  - Future-proof codebase aligned with modern JavaScript
+  - Consistent import/export syntax across frontend and backend
 - **Frontend:** Modern, component-based JS framework (React/Next.js). Focus on a clean, responsive UI.
 - **Backend:** Scalable platform (Node.js/Express). Ready to orchestrate multiple API calls.
 - **Database:** For a balance of structure and flexibility (PostgreSQL/JSONB).
@@ -65,6 +70,16 @@ For detailed technical and product documentation, see the respective `README.md`
 
 - All sensitive configuration (API keys, credentials, etc.) must be managed using [GitHub Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) only. **Do not commit secrets to the repository or use alternative secret management systems.**
 
+## Secrets & Sensitive Data
+
+- All sensitive configuration (API keys, credentials, etc.) must be managed using [GitHub Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) only. **Do not commit secrets to the repository or use alternative secret management systems.**
+
+## Environment Variables & .env Usage
+
+- For local development, copy `.env.example` to `.env` in the project root and fill in the required values.
+- The dev container and Codespaces support environment variables out of the box.
+- Do not commit secrets or sensitive values to the repository.
+- See `CONTRIBUTING.md` for more details on environment variable management.
 ---
 
 ## Getting Started
